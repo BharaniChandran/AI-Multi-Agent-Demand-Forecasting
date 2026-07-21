@@ -1,42 +1,67 @@
+import ForecastCard from "../components/ForecastCard";
+
 export default function Dashboard() {
   return (
-    <div className="container mt-5">
-      <h1 className="text-primary">
-        AI Multi-Agent Product Demand Forecasting System
-      </h1>
+    <div className="container-fluid">
 
-      <hr />
+      <h2 className="mb-4">
+        AI Multi-Agent Product Demand Forecasting Dashboard
+      </h2>
 
-      <h3>Dashboard</h3>
+      <div className="row">
 
-      <p>
-        Welcome to the Product Demand Forecasting Dashboard.
-      </p>
+        <ForecastCard
+          title="Total Products"
+          value="250"
+          color="primary"
+        />
 
-      <div className="row mt-4">
+        <ForecastCard
+          title="Forecasts Generated"
+          value="125"
+          color="success"
+        />
 
-        <div className="col-md-4">
-          <div className="card shadow p-3">
-            <h4>Total Products</h4>
-            <h2>0</h2>
-          </div>
-        </div>
-
-        <div className="col-md-4">
-          <div className="card shadow p-3">
-            <h4>Forecasts</h4>
-            <h2>0</h2>
-          </div>
-        </div>
-
-        <div className="col-md-4">
-          <div className="card shadow p-3">
-            <h4>Accuracy</h4>
-            <h2>0%</h2>
-          </div>
-        </div>
+        <ForecastCard
+          title="Model Accuracy"
+          value="94.8%"
+          color="warning"
+        />
 
       </div>
+
+      <div className="card shadow-sm mt-4">
+        <div className="card-body">
+          <h4>Project Status</h4>
+
+          <table className="table table-striped mt-3">
+            <thead>
+              <tr>
+                <th>Module</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>Frontend</td>
+                <td>✅ Completed</td>
+              </tr>
+
+              <tr>
+                <td>Backend</td>
+                <td>🚧 In Progress</td>
+              </tr>
+
+              <tr>
+                <td>ML Model</td>
+                <td>🚧 In Progress</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
     </div>
   );
 }
