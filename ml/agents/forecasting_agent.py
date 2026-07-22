@@ -20,6 +20,7 @@ class ForecastingAgent:
 if __name__ == "__main__":
 
     DATA_DIR = BASE_DIR / "data" / "processed"
+        
 
     X_test = pd.read_csv(DATA_DIR / "X_test.csv")
 

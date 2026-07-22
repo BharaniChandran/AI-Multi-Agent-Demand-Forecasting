@@ -1,0 +1,6 @@
+Store_ID,Product_ID,Price,Year,Month,Day,DayOfWeek,Quarter,IsWeekend,Product_Name_Keyboard,Product_Name_Laptop,Product_Name_Monitor,Product_Name_Mouse,Product_Name_Printer,Category_Accessories,Category_Electronics
+1,101,55000,2024,10,1,2,4,0,0,1,0,0,0,0,1
+2,102,800,2024,10,2,3,4,0,0,0,0,1,0,1,0
+3,103,1500,2024,10,3,4,4,0,1,0,0,0,0,1,0
+4,104,12000,2024,10,4,5,4,1,0,0,1,0,0,0,1
+5,105,8500,2024,10,5,6,4,1,0,0,0,0,1,0,1
