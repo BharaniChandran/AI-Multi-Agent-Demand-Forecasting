@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from datetime import date
+from datetime import date, timedelta
 
 from app.services.forecast_service import ForecastService
 
@@ -20,7 +20,8 @@ class ForecastRequest(BaseModel):
     store_id: int
     product_id: int
     price: float
-    date: date
+    start_date: date
+    end_date: date
     product_name: str
     category: str
 
@@ -28,23 +29,70 @@ class ForecastRequest(BaseModel):
 @router.post("/")
 def generate_forecast(request: ForecastRequest):
     """
-    Generate product demand forecast,
+    Generate product demand forecasts for a date range,
     detect anomalies,
     and generate inventory recommendation.
     """
 
     try:
 
-        result = forecast_service.generate_forecast(
-            store_id=request.store_id,
-            product_id=request.product_id,
-            price=request.price,
-            date=str(request.date),
-            product_name=request.product_name,
-            category=request.category,
-        )
+        # Validate date range
+        if request.start_date > request.end_date:
+            raise HTTPException(
+                status_code=400,
+                detail="start_date must be before or equal to end_date"
+            )
 
-        return result
+        forecast_results = []
+
+        # Start from the requested start date
+        current_date = request.start_date
+
+        # Generate prediction for every date in the range
+        while current_date <= request.end_date:
+
+            result = forecast_service.generate_forecast(
+                store_id=request.store_id,
+                product_id=request.product_id,
+                price=request.price,
+                date=str(current_date),
+                product_name=request.product_name,
+                category=request.category,
+            )
+
+            # Extract predicted sales from the existing ML response
+            predicted_sales = result["prediction"]["predicted_sales"]
+
+            # Add date and prediction to forecast list
+            forecast_results.append({
+                "date": str(current_date),
+                "sales": predicted_sales
+            })
+
+            # Move to next date
+            current_date += timedelta(days=1)
+
+        # Use the anomaly and recommendation from the final prediction
+        final_result = result
+
+        return {
+            "forecast": forecast_results,
+            "anomaly": final_result.get(
+                "anomaly",
+                {
+                    "status": "Normal"
+                }
+            ),
+            "recommendation": final_result.get(
+                "recommendation",
+                {
+                    "message": "No recommendation available"
+                }
+            )
+        }
+
+    except HTTPException:
+        raise
 
     except Exception as e:
 
