@@ -1,92 +1,65 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.product import router as product_router
 from app.api.sales import router as sales_router
 from app.api.forecast import router as forecast_router
 
 
-# Create the FastAPI application.
+# Create FastAPI application
 app = FastAPI(
     title="AI Multi-Agent Product Demand Forecasting System",
-    description=(
-        "Backend API for product management, sales management, "
-        "CSV sales upload, demand forecasting, anomaly detection, "
-        "and inventory recommendations."
-    ),
+    description="Backend API for product management, sales data, and AI-powered demand forecasting.",
     version="1.0.0",
 )
 
 
-# ---------------------------------------------------------
-# Product APIs
-# ---------------------------------------------------------
-# Existing Product CRUD endpoints remain unchanged.
+# ============================================================
+# CORS CONFIGURATION
+# ============================================================
+# Allows the React frontend to communicate with this backend.
+# Frontend development servers:
+#   http://localhost:5173
+#   http://localhost:5179
 #
-# Examples:
-# POST   /products/
-# GET    /products/
-# GET    /products/{product_id}
-# PUT    /products/{product_id}
-# DELETE /products/{product_id}
-# ---------------------------------------------------------
+# The backend is running on port 8000.
+# ============================================================
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://localhost:5179",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+# ============================================================
+# REGISTER API ROUTERS
+# ============================================================
+
+# Product CRUD APIs
 app.include_router(product_router)
 
-
-# ---------------------------------------------------------
-# Sales APIs
-# ---------------------------------------------------------
-# Existing Sales CRUD and CSV upload endpoints remain unchanged.
-#
-# Examples:
-# POST /sales/
-# GET  /sales/
-# POST /sales/upload
-# ---------------------------------------------------------
-
+# Sales CRUD and CSV upload APIs
 app.include_router(sales_router)
 
-
-# ---------------------------------------------------------
-# Forecast APIs
-# ---------------------------------------------------------
-# New ML integration endpoint.
-#
-# Current endpoint:
-# POST /forecast/
-#
-# This connects:
-# FastAPI
-#     ↓
-# Forecast Router
-#     ↓
-# Forecast Service
-#     ↓
-# ML Preprocessing
-#     ↓
-# Forecasting Agent
-#     ↓
-# Random Forest Model
-#     ↓
-# Recommendation Agent
-# ---------------------------------------------------------
-
+# AI demand forecasting API
 app.include_router(forecast_router)
 
 
-# ---------------------------------------------------------
-# Root Endpoint
-# ---------------------------------------------------------
+# ============================================================
+# ROOT ENDPOINT
+# ============================================================
 
 @app.get("/")
 def root():
     return {
-        "message": "AI Multi-Agent Product Demand Forecasting System API",
-        "status": "running",
-        "version": "1.0.0",
-        "services": {
-            "products": "available",
-            "sales": "available",
-            "forecast": "available",
-        },
+        "message": "AI Multi-Agent Product Demand Forecasting System API is running",
+        "status": "success",
+        "docs": "/docs",
+        "forecast_endpoint": "/forecast/",
     }
