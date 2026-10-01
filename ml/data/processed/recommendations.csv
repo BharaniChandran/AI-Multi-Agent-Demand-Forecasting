@@ -1,0 +1,51 @@
+Actual,Predicted,Anomaly,Recommendation
+49,47.63,1,Maintain current stock
+10,10.89,1,Reduce inventory
+17,18.85,-1,Investigate unusual sales pattern
+12,15.03,1,Reduce inventory
+16,17.49,1,Reduce inventory
+85,82.41,1,Increase inventory
+14,16.24,1,Reduce inventory
+19,16.1,1,Reduce inventory
+81,80.96,1,Increase inventory
+50,52.16,1,Maintain current stock
+5,10.73,1,Reduce inventory
+53,51.19,1,Maintain current stock
+47,49.73,1,Maintain current stock
+15,12.98,-1,Investigate unusual sales pattern
+14,16.93,1,Reduce inventory
+8,9.5,1,Reduce inventory
+17,18.58,1,Reduce inventory
+19,17.22,1,Reduce inventory
+8,8.91,1,Reduce inventory
+22,16.44,1,Reduce inventory
+45,48.83,1,Maintain current stock
+48,51.58,1,Maintain current stock
+9,7.67,1,Reduce inventory
+78,80.82,1,Increase inventory
+20,16.46,1,Reduce inventory
+17,17.6,1,Reduce inventory
+86,81.8,1,Increase inventory
+47,50.57,1,Maintain current stock
+16,16.39,1,Reduce inventory
+80,82.52,1,Increase inventory
+18,15.91,1,Reduce inventory
+81,80.32,1,Increase inventory
+78,82.4,1,Increase inventory
+85,78.1,1,Increase inventory
+8,10.83,1,Reduce inventory
+49,50.53,1,Maintain current stock
+13,16.52,1,Reduce inventory
+76,80.91,1,Increase inventory
+21,16.91,1,Reduce inventory
+57,51.24,1,Maintain current stock
+23,17.36,1,Reduce inventory
+77,81.31,1,Increase inventory
+20,14.92,1,Reduce inventory
+14,9.98,1,Reduce inventory
+80,81.17,1,Increase inventory
+9,9.08,1,Reduce inventory
+13,10.03,1,Reduce inventory
+48,52.75,1,Maintain current stock
+50,50.64,1,Maintain current stock
+10,13.35,1,Reduce inventory

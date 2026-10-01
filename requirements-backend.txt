@@ -1,0 +1,16 @@
+fastapi
+uvicorn[standard]
+python-multipart
+pydantic
+sqlalchemy
+pandas
+numpy
+scikit-learn
+scipy
+joblib
+lightgbm
+xgboost
+prophet
+openpyxl
+holidays
+python-dateutil
